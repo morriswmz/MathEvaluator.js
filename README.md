@@ -14,10 +14,10 @@ Simple pass a string to the evaluator and it will parse and evaluate the result.
 
 It support almost all arithmetic operations including +, -, *, /, ^, %, and shift operations like >>, >>>, <<:
 
-	\>MathEvaluator.evaluate('(1+2^3)%3-4>>1')
-	\>{success:true, answer:-2}
+	console>MathEvaluator.evaluate('(1+2^3)%3-4>>1')
+	console>{success:true, answer:-2}
 
 It also support basic functions like sin, cos, tan, exp, log, etc:
 
-	\>MathEvaluator.evaluate('sin(pi/2)+1')
-	\>{success:true, answer:2}
+	console>MathEvaluator.evaluate('sin(pi/2)+1')
+	console>{success:true, answer:2}
