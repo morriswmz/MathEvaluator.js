@@ -25,7 +25,7 @@ var MathEvaluator = (function () {
 				var sum = 0, i;
 				if (step < 0) step = 0;
 				step = step || 1;
-				for (i = start;i < stop;i += step) {
+				for (i = start;i <= stop;i += step) {
 					sum += i;
 				}
 				return sum;
@@ -145,6 +145,13 @@ var MathEvaluator = (function () {
 				return undefined;
 			}
 		},
+		'separator' : {
+			r : /^(,)/,
+			f : function (str) {
+				var s = new symbolTable[','];
+				return s;
+			}
+		},
 		'operator' : {
 			r : /^([+\-*\/\^%]|>{2,3}|<<)/,
 			f : function (str) {
@@ -155,6 +162,20 @@ var MathEvaluator = (function () {
 			r : /^(\(|\))/,
 			f : function (str) {
 				return (new symbolTable[str]);
+			}
+		},
+		'hex' : {
+			r : /^(0x[0-9a-f]+)/,
+			f : function (str) {
+				var s = new symbolTable['(literal)'];
+				s.value = parseInt(str);
+				return s;
+			}
+		},
+		'bin' : {
+			r : /^(0b[01]+)/,
+			f : function (str) {
+				// @todo
 			}
 		},
 		'float' : {
@@ -171,20 +192,6 @@ var MathEvaluator = (function () {
 				var s = new symbolTable['(literal)'];
 				s.value = parseInt(str);
 				return s;
-			}
-		},
-		'hex' : {
-			r : /^0x([0-9a-f]+)/,
-			f : function (str) {
-				var s = new symbolTable['(literal)'];
-				s.value = parseInt(str);
-				return s;
-			}
-		},
-		'bin' : {
-			r : /^0b([01]+)/,
-			f : function (str) {
-				// @todo
 			}
 		},
 		'name' : {
